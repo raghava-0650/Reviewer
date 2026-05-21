@@ -1,0 +1,40 @@
+import { eq } from 'drizzle-orm';
+import {
+  NextRequest,
+  NextResponse,
+} from 'next/server';
+
+import { db } from '@/db';
+import { users } from '@/db/schema';
+import { currentUser } from '@clerk/nextjs/server';
+
+export async function POST(req: NextRequest) {
+    
+    //this is for getting user login information, currentUser is getting imported from the clerk server
+    const user = await currentUser();
+
+    try {
+
+        //this is for checking if the user is already present in the database or not
+        const userResult = await db.select().from(users).where(
+            eq(users.email, user?.primaryEmailAddress?.emailAddress ?? '')
+        );
+
+        if (userResult.length == 0) {
+            const newUser = await db.insert(users).values({
+                email: user?.primaryEmailAddress?.emailAddress ?? '',
+                name: user?.fullName ?? 'New User'
+            }).returning()
+
+            return NextResponse.json({ user: newUser[0] })
+        }
+        else {
+            return NextResponse.json({ user: userResult[0] })
+        }
+
+    }
+    catch (e) {
+        console.log("Error Creating User: ", e)
+        return NextResponse.json({ error: "Failed to create new user" }, { status: 500 })
+    }
+}
