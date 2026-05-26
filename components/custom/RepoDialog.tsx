@@ -7,8 +7,19 @@ import React, {
 
 import axios from 'axios';
 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { UserDetailContext } from '@/context/UserDetailContext';
 
+import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
 export type Repo = {
@@ -72,17 +83,17 @@ function RepoDialog({ setRefreshPage }: { setRefreshPage: (refresh: boolean) => 
     }
 
     return (
-        // <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-        //     <DialogTrigger>
-        //         <Button>+Add Repo</Button>
-        //     </DialogTrigger>
-        //     <DialogContent>
-        //         <DialogHeader>
-        //             <DialogTitle>Add Repository</DialogTitle>
-        //             <DialogDescription>
-        //                 Search and select one of your github repositories
-        //             </DialogDescription>
-        //         </DialogHeader>
+        <Dialog open={isOpen} onOpenChange={(open) =>setIsOpen(open)}>
+            <DialogTrigger>
+                <Button>+Add Repo</Button>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Add Repository</DialogTitle>
+                    <DialogDescription>
+                        Search and select one of your github repositories
+                    </DialogDescription>
+                </DialogHeader>
                 <div>
                     <Input placeholder='Search Repos by Name' onChange={(event) => setSearchTerm(event.target.value)} />
                     {/* Repo List */}
@@ -94,13 +105,13 @@ function RepoDialog({ setRefreshPage }: { setRefreshPage: (refresh: boolean) => 
                         ))}
                     </ul>
                 </div>
-        //         <DialogFooter className='flex gap-5'>
-        //             <DialogClose>Cancel</DialogClose>
-        //             <Button onClick={() => SaveRepoToDB()}>Add</Button>
-        //         </DialogFooter>
-        //     </DialogContent>
+                <DialogFooter className='flex gap-5'>
+                    <DialogClose>Cancel</DialogClose>
+                    <Button onClick={() => SaveRepoToDB()}>Add</Button>
+                </DialogFooter>
+            </DialogContent>
 
-        // </Dialog>
+        </Dialog>
     )
 }
 
