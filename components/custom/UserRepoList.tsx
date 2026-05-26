@@ -4,9 +4,29 @@ import React, {
 } from 'react';
 
 import axios from 'axios';
+import {
+  CheckCircle2,
+  Link2Icon,
+  ListChecks,
+  Loader2,
+  Loader2Icon,
+  Sparkles,
+  TrendingUp,
+  XCircle,
+} from 'lucide-react';
+import Image from 'next/image';
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { UserDetailContext } from '@/context/UserDetailContext';
 
+import { Button } from '../ui/button';
+import RepoSettings from './RepoSettings';
+import TestCaseList from './TestCaseList';
 import { UserRepo } from './WorkspaceBody';
 
 type props = {
@@ -104,7 +124,7 @@ function UserRepoList({ repoList, setReload }: props) {
     return (
         <div className='mt-10'>
             <h2 className='my-3 font-medium'>REPOSITORIES</h2>
-            {/* <Accordion type="single" collapsible
+            <Accordion type="single" collapsible
                 onValueChange={(value) => GetTestCases(Number(value))}
             >
                 {repoList.map((repo, index) => (
@@ -197,7 +217,7 @@ function UserRepoList({ repoList, setReload }: props) {
                     </AccordionItem>
 
                 ))}
-            </Accordion> */}
+            </Accordion>
         </div>
     )
 }
