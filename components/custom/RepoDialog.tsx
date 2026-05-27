@@ -83,8 +83,8 @@ function RepoDialog({ setRefreshPage }: { setRefreshPage: (refresh: boolean) => 
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={(open) =>setIsOpen(open)}>
-            <DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+            <DialogTrigger asChild>
                 <Button>+Add Repo</Button>
             </DialogTrigger>
             <DialogContent>
