@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 
 import axios from 'axios';
+import { Settings2 } from 'lucide-react';
 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 import { UserRepo } from './WorkspaceBody';
 
 type props = {
@@ -35,18 +49,18 @@ function RepoSettings({ repo, setReload }: props) {
     }
 
     return (
-        // <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-        //     <DialogTrigger>
-        //         <Button> <Settings2 className='h-4 2-4 mr-1' /> Project Config</Button>
-        //     </DialogTrigger>
-        //     <DialogContent>
-        //         <DialogHeader>
-        //             <DialogTitle className='flex gap-2 items-center'> <Settings2 className='text-primary' /> Project/Repo Settings</DialogTitle>
-        //             <DialogDescription>
-        //                 Configure project-level defaults used during script generation and execution.
-        //             </DialogDescription>
-        //         </DialogHeader>
-        //         <div>
+        <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+            <DialogTrigger>
+                <Button> <Settings2 className='h-4 2-4 mr-1' /> Project Config</Button>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle className='flex gap-2 items-center'> <Settings2 className='text-primary' /> Project/Repo Settings</DialogTitle>
+                    <DialogDescription>
+                        Configure project-level defaults used during script generation and execution.
+                    </DialogDescription>
+                </DialogHeader>
+                <div>
                     <div>
                         <label className='text-gray-500'>APP URL/DEFAULT WEBSITE</label>
                         <Input value={repoSettings?.targetDomain}
@@ -54,23 +68,23 @@ function RepoSettings({ repo, setReload }: props) {
                             placeholder='App url/Domain' className='mt-1' />
                         <p className='text-xs text-gray-400'>The target address where automated headless browsers will connect and run test cases.</p>
                     </div>
-        //             <div className='mt-4'>
-        //                 <label className='text-gray-500'>GLOBAL TEST INSTRUCTION</label>
-        //                 <Textarea value={repoSettings?.globalInstruction}
-        //                     onChange={(e) => setRepoSettings({ ...repoSettings, globalInstruction: e.target.value })}
+                    <div className='mt-4'>
+                        <label className='text-gray-500'>GLOBAL TEST INSTRUCTION</label>
+                        <Textarea value={repoSettings?.globalInstruction}
+                            onChange={(e) => setRepoSettings({ ...repoSettings, globalInstruction: e.target.value })}
 
-        //                     placeholder='Instructions' className='mt-1' />
-        //                 <p className='text-xs text-gray-400'>Include any authentication credentials, cookies, setup, or teardown instructions. These are automatically appended to Gemini's prompts.</p>
-        //             </div>
-        //         </div>
-        //         <DialogFooter>
-        //             <DialogClose>
-        //                 <Button variant={'outline'}>Cancel</Button>
-        //             </DialogClose>
-        //             <Button onClick={handleSaveSettings}>Save Config</Button>
-        //         </DialogFooter>
-        //     </DialogContent>
-        // </Dialog>
+                            placeholder='Instructions' className='mt-1' />
+                        <p className='text-xs text-gray-400'>Include any authentication credentials, cookies, setup, or teardown instructions. These are automatically appended to Gemini's prompts.</p>
+                    </div>
+                </div>
+                <DialogFooter>
+                    <DialogClose>
+                        <Button variant={'outline'}>Cancel</Button>
+                    </DialogClose>
+                    <Button onClick={handleSaveSettings}>Save Config</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     )
 }
 
